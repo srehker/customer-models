@@ -48,7 +48,7 @@ public class DayComparisonLoadForecast implements LoadForecast {
 			for(TimeSeriesDay d: matchingDays){
 				averageLoad+=d.getHourvalues().get(h);
 			}
-			ret.add(averageLoad/matchingDays.size());
+			ret.add(Math.round(averageLoad*100/matchingDays.size())/100.);
 		}
 		
 		return ret;

@@ -12,9 +12,7 @@ public class TimeSeries {
 	private List<TimeSeriesDay> days;
 	private DateTime fromDate;
 	private DateTime toDate;
-	
 
-	
 	public TimeSeries(List<TimeSeriesDay> days, DateTime fromDate,
 			DateTime toDate) {
 		super();
@@ -29,36 +27,67 @@ public class TimeSeries {
 
 	public void setDays(List<TimeSeriesDay> days) {
 		this.days = days;
-	} 
-	
-	public void outputFile(String filename){
-		try
-		{
-		    FileWriter writer = new FileWriter(filename);
-	 
-		    writer.append("Date");
-		    writer.append(';');
-		    writer.append("Load");		    
-		    writer.append('\n');
-	 
-		    for(TimeSeriesDay d:days){
-		    	for(int i=0; i<d.getHourvalues().size(); i++){
-		    		LocalDateTime tmp=new LocalDateTime(d.getDate()).withHourOfDay(i+1!=24?i+1:0);
-		    		//DateTime tmp= new DateTime(d.getDate()).withHourOfDay(i+1!=24?i+1:0);
-		    	writer.append(tmp.toString("dd.MM.yyyy HH:mm"));
-			    writer.append(';');
-			    writer.append(d.getHourvalues().get(i).toString());		    
-			    writer.append('\n');}	
-		    }
-		    	 
-		    writer.flush();
-		    writer.close();
+	}
+
+	public double getTotalLoad() {
+		return getTotalLoad(fromDate, toDate);
+	}
+
+	public double getTotalLoad(DateTime fromDate, DateTime toDate) {
+		double totalLoad = 0;
+		for (TimeSeriesDay d : days) {
+			if (d.getDate().isAfter(fromDate) && d.getDate().isBefore(toDate)
+					|| d.getDate().equals(fromDate)
+					|| d.getDate().equals(toDate))
+				for (Double value : d.getHourvalues()) {
+					totalLoad += value;
+				}
 		}
-		catch(IOException e)
-		{
-		     e.printStackTrace();
-		} 
-	    
+		return Math.round(totalLoad*100)/100.;
+	}
+
+	public double getMaxLoad(DateTime fromDate, DateTime toDate) {
+		double maxLoad = 0;
+		for (TimeSeriesDay d : days) {
+			if (d.getDate().isAfter(fromDate) && d.getDate().isBefore(toDate)
+					|| d.getDate().equals(fromDate)
+					|| d.getDate().equals(toDate))
+				for (Double value : d.getHourvalues()) {
+					if (maxLoad < value)
+						maxLoad = value;
+				}
+		}
+		return maxLoad;
+	}
+
+	public void outputFile(String filename) {
+		try {
+			FileWriter writer = new FileWriter(filename);
+
+			writer.append("Date");
+			writer.append(';');
+			writer.append("Load");
+			writer.append('\n');
+
+			for (TimeSeriesDay d : days) {
+				for (int i = 0; i < d.getHourvalues().size(); i++) {
+					LocalDateTime tmp = new LocalDateTime(d.getDate())
+							.withHourOfDay(i + 1 != 24 ? i + 1 : 0);
+					// DateTime tmp= new
+					// DateTime(d.getDate()).withHourOfDay(i+1!=24?i+1:0);
+					writer.append(tmp.toString("dd.MM.yyyy HH:mm"));
+					writer.append(';');
+					writer.append(d.getHourvalues().get(i).toString());
+					writer.append('\n');
+				}
+			}
+
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

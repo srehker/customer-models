@@ -15,8 +15,11 @@ public enum Daytype {
 	
 	public static Daytype getDaytypeFromDate(DateTime d){
 		
-		// for now just christmas
+		// for now just christmas & new year
 		if(d.getDayOfMonth() >= 24 && d.getDayOfMonth() <= 26 && d.getMonthOfYear()==DateTimeConstants.DECEMBER){
+			return HOLIDAY;
+		}
+		if(d.getDayOfMonth() == 1 && d.getMonthOfYear()==DateTimeConstants.JANUARY){
 			return HOLIDAY;
 		}
 		

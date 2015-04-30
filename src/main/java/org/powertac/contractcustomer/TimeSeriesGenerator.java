@@ -38,7 +38,7 @@ public class TimeSeriesGenerator {
 				for (int i = 1; i < 25; i++) {
 					hourvalues.add(nf.parse(split[i]).doubleValue()); // TODO
 																		// randomize
-																		// here
+																		// here?
 				}
 
 				TimeSeriesDay d = new TimeSeriesDay(
