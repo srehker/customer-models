@@ -1,4 +1,4 @@
-package org.powertac.contractcustomer;
+package org.powertac.contractcustomer.timeseries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class DayComparisonLoadForecast implements LoadForecast {
 	HashMap<String, ArrayList<Double>> averageLoads=new HashMap<String, ArrayList<Double>>();
 	
 	@Override
-	public TimeSeries calculateLoadForecast(TimeSeries historicLoad,
+	public LoadTimeSeries calculateLoadForecast(LoadTimeSeries historicLoad,
 			DateTime fromDate, DateTime toDate) {
 
 		for(Daytype daytype: Daytype.values()){
@@ -27,13 +27,13 @@ public class DayComparisonLoadForecast implements LoadForecast {
 		    predictedDays.add(new TimeSeriesDay(Daytype.getDaytypeFromDate(date), date, averageLoads.get(key)));
 		}
 		
-		TimeSeries predictionTimeSeries=new TimeSeries(predictedDays, fromDate, toDate);
+		LoadTimeSeries predictionTimeSeries=new LoadTimeSeries(predictedDays, fromDate, toDate);
 		
 		return predictionTimeSeries;
 	}
 
 	public ArrayList<Double> getAverageLoadPerDaytypeAndMonth(
-			TimeSeries historicLoad, Daytype daytype, int month) {
+			LoadTimeSeries historicLoad, Daytype daytype, int month) {
 		ArrayList<TimeSeriesDay> matchingDays = new ArrayList<TimeSeriesDay>();
 		for (TimeSeriesDay d : historicLoad.getDays()) {			
 			if (d.getDaytype().equals(daytype)

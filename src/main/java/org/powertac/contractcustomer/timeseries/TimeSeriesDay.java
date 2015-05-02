@@ -1,4 +1,4 @@
-package org.powertac.contractcustomer;
+package org.powertac.contractcustomer.timeseries;
 
 import java.util.ArrayList;
 

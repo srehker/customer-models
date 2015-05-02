@@ -1,4 +1,4 @@
-package org.powertac.contractcustomer;
+package org.powertac.contractcustomer.timeseries;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +15,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class TimeSeriesGenerator {
 
-	public TimeSeries generateTimeSeries(DateTime start, DateTime end) {
+	public LoadTimeSeries generateLoadTimeSeries(DateTime start, DateTime end) {
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ";";
@@ -35,10 +35,23 @@ public class TimeSeriesGenerator {
 				DateTime date = df.parseDateTime(split[0]);
 				ArrayList<Double> hourvalues = new ArrayList<Double>();
 
-				for (int i = 1; i < 25; i++) {
-					hourvalues.add(nf.parse(split[i]).doubleValue()); // TODO
-																		// randomize
-																		// here?
+				hourvalues.add(nf.parse(split[24]).doubleValue());// 24:00 -->
+																	// 0:00
+				for (int i = 1; i < 24; i++) {
+					double value = nf.parse(split[i]).doubleValue();
+
+					double rand = Math.random() * 100 +1;
+					if (rand >= 99) {
+						value *=1.1; //+10%
+					} else if (rand <= 2) {
+						value *=0.9; //-10%
+					} else if (rand <= 5) {
+						value *=1.01; //+1%
+					} else if (rand >= 95) {
+						value *=0.99; //-1%
+					}
+
+					hourvalues.add(value);
 				}
 
 				TimeSeriesDay d = new TimeSeriesDay(
@@ -70,6 +83,6 @@ public class TimeSeriesGenerator {
 				finalDays.add(d);
 			}
 		}
-		return new TimeSeries(finalDays, start, end);
+		return new LoadTimeSeries(finalDays, start, end);
 	}
 }

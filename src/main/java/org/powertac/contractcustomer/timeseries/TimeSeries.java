@@ -1,11 +1,10 @@
-package org.powertac.contractcustomer;
+package org.powertac.contractcustomer.timeseries;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDateTime;
 
 public class TimeSeries {
@@ -17,8 +16,8 @@ public class TimeSeries {
 			DateTime toDate) {
 		super();
 		this.days = days;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
+		this.setFromDate(fromDate);
+		this.setToDate(toDate);
 	}
 
 	public List<TimeSeriesDay> getDays() {
@@ -27,38 +26,7 @@ public class TimeSeries {
 
 	public void setDays(List<TimeSeriesDay> days) {
 		this.days = days;
-	}
-
-	public double getTotalLoad() {
-		return getTotalLoad(fromDate, toDate);
-	}
-
-	public double getTotalLoad(DateTime fromDate, DateTime toDate) {
-		double totalLoad = 0;
-		for (TimeSeriesDay d : days) {
-			if (d.getDate().isAfter(fromDate) && d.getDate().isBefore(toDate)
-					|| d.getDate().equals(fromDate)
-					|| d.getDate().equals(toDate))
-				for (Double value : d.getHourvalues()) {
-					totalLoad += value;
-				}
-		}
-		return Math.round(totalLoad*100)/100.;
-	}
-
-	public double getMaxLoad(DateTime fromDate, DateTime toDate) {
-		double maxLoad = 0;
-		for (TimeSeriesDay d : days) {
-			if (d.getDate().isAfter(fromDate) && d.getDate().isBefore(toDate)
-					|| d.getDate().equals(fromDate)
-					|| d.getDate().equals(toDate))
-				for (Double value : d.getHourvalues()) {
-					if (maxLoad < value)
-						maxLoad = value;
-				}
-		}
-		return maxLoad;
-	}
+	}	
 
 	public void outputFile(String filename) {
 		try {
@@ -72,9 +40,7 @@ public class TimeSeries {
 			for (TimeSeriesDay d : days) {
 				for (int i = 0; i < d.getHourvalues().size(); i++) {
 					LocalDateTime tmp = new LocalDateTime(d.getDate())
-							.withHourOfDay(i + 1 != 24 ? i + 1 : 0);
-					// DateTime tmp= new
-					// DateTime(d.getDate()).withHourOfDay(i+1!=24?i+1:0);
+							.withHourOfDay(i); 
 					writer.append(tmp.toString("dd.MM.yyyy HH:mm"));
 					writer.append(';');
 					writer.append(d.getHourvalues().get(i).toString());
@@ -88,6 +54,22 @@ public class TimeSeries {
 			e.printStackTrace();
 		}
 
+	}
+
+	public DateTime getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(DateTime fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public DateTime getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(DateTime toDate) {
+		this.toDate = toDate;
 	}
 
 }

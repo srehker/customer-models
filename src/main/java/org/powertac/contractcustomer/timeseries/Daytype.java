@@ -1,4 +1,4 @@
-package org.powertac.contractcustomer;
+package org.powertac.contractcustomer.timeseries;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
