@@ -15,7 +15,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class TimeSeriesGenerator {
 
-	public LoadTimeSeries generateLoadTimeSeries(DateTime start, DateTime end) {
+	public LoadTimeSeries generateLoadTimeSeries(DateTime start, DateTime end, int fileId) {
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ";";
@@ -27,7 +27,7 @@ public class TimeSeriesGenerator {
 		try {
 
 			br = new BufferedReader(new FileReader(filePath
-					+ "\\src\\main\\resources\\historical-load-profiles.csv"));
+					+ "\\src\\main\\resources\\load"+fileId+".csv"));
 			br.readLine(); // skip 1st line
 			while ((line = br.readLine()) != null) {
 

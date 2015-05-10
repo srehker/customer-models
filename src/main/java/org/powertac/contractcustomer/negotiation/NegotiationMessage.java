@@ -1,9 +1,13 @@
 package org.powertac.contractcustomer.negotiation;
 
+import org.powertac.common.Contract;
+
+@Deprecated
 public class NegotiationMessage {
 	
 	private Action action;
 	private Contract offer;
+	private Coordinator sender;
 	public NegotiationMessage(Action action, Contract offer) {
 		super();
 		this.action = action;
