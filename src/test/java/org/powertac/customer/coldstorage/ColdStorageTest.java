@@ -32,6 +32,7 @@ import java.util.Queue;
 import java.util.TreeMap;
 
 
+
 //import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -61,6 +62,7 @@ import org.powertac.common.enumerations.PowerType;
 import org.powertac.common.interfaces.CustomerServiceAccessor;
 //import org.powertac.common.interfaces.Accounting;
 import org.powertac.common.interfaces.ServerConfiguration;
+import org.powertac.common.repo.ContractRepo;
 import org.powertac.common.repo.CustomerRepo;
 import org.powertac.common.repo.RandomSeedRepo;
 import org.powertac.common.repo.TariffRepo;
@@ -510,5 +512,11 @@ public class ColdStorageTest
       // Auto-generated method stub
       return null;
     }
+
+	@Override
+	public ContractRepo getContractRepo() {
+		//  Auto-generated method stub
+		return null;
+	}
   }
 }

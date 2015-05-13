@@ -8,11 +8,11 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.powertac.common.Broker;
 import org.powertac.common.Contract;
+import org.powertac.common.timeseries.LoadForecast;
+import org.powertac.common.timeseries.LoadTimeSeries;
+import org.powertac.common.timeseries.TimeSeriesGenerator;
 import org.powertac.contractcustomer.negotiation.NegotiationMessage;
 import org.powertac.contractcustomer.negotiation.NegotiationStrategy;
-import org.powertac.contractcustomer.timeseries.LoadForecast;
-import org.powertac.contractcustomer.timeseries.LoadTimeSeries;
-import org.powertac.contractcustomer.timeseries.TimeSeriesGenerator;
 
 public class ContractProducer extends Broker implements NegotiationStrategy{
 

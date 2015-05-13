@@ -47,6 +47,7 @@ import org.powertac.common.config.Configurator;
 import org.powertac.common.enumerations.PowerType;
 import org.powertac.common.interfaces.CustomerServiceAccessor;
 import org.powertac.common.interfaces.ServerConfiguration;
+import org.powertac.common.repo.ContractRepo;
 import org.powertac.common.repo.CustomerRepo;
 import org.powertac.common.repo.RandomSeedRepo;
 import org.powertac.common.repo.TariffRepo;
@@ -796,5 +797,11 @@ public class LiftTruckTest
       // Auto-generated method stub
       return null;
     }
+
+	@Override
+	public ContractRepo getContractRepo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
   }
 }

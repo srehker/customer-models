@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.powertac.contractcustomer.timeseries.DayComparisonLoadForecast;
-import org.powertac.contractcustomer.timeseries.LoadForecast;
-import org.powertac.contractcustomer.timeseries.LoadTimeSeries;
-import org.powertac.contractcustomer.timeseries.TimeSeriesGenerator;
+import org.powertac.common.timeseries.DayComparisonLoadForecast;
+import org.powertac.common.timeseries.LoadForecast;
+import org.powertac.common.timeseries.LoadTimeSeries;
+import org.powertac.common.timeseries.TimeSeriesGenerator;
 
 public class Testmain {
 	
