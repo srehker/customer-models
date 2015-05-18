@@ -33,6 +33,7 @@ import java.util.TreeMap;
 
 
 
+
 //import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -67,6 +68,7 @@ import org.powertac.common.repo.CustomerRepo;
 import org.powertac.common.repo.RandomSeedRepo;
 import org.powertac.common.repo.TariffRepo;
 import org.powertac.common.repo.TariffSubscriptionRepo;
+import org.powertac.common.repo.TimeSeriesRepo;
 import org.powertac.common.repo.TimeslotRepo;
 import org.powertac.common.repo.WeatherReportRepo;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -516,6 +518,12 @@ public class ColdStorageTest
 	@Override
 	public ContractRepo getContractRepo() {
 		//  Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TimeSeriesRepo getTimeSeriesRepo() {
+		// TODO Auto-generated method stub
 		return null;
 	}
   }
