@@ -34,6 +34,7 @@ import java.util.TreeMap;
 
 
 
+
 //import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -60,6 +61,7 @@ import org.powertac.common.Timeslot;
 import org.powertac.common.WeatherReport;
 import org.powertac.common.config.Configurator;
 import org.powertac.common.enumerations.PowerType;
+import org.powertac.common.interfaces.BrokerProxy;
 import org.powertac.common.interfaces.CustomerServiceAccessor;
 //import org.powertac.common.interfaces.Accounting;
 import org.powertac.common.interfaces.ServerConfiguration;
@@ -523,6 +525,12 @@ public class ColdStorageTest
 
 	@Override
 	public TimeSeriesRepo getTimeSeriesRepo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BrokerProxy getBrokerProxyService() {
 		// TODO Auto-generated method stub
 		return null;
 	}

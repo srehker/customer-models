@@ -9,6 +9,7 @@ import org.joda.time.Instant;
 import org.powertac.common.Competition;
 import org.powertac.common.CustomerInfo;
 import org.powertac.common.enumerations.PowerType;
+import org.powertac.common.interfaces.BrokerProxy;
 import org.powertac.common.interfaces.ContractMarket;
 import org.powertac.common.interfaces.ContractNegotiationMessageListener;
 import org.powertac.common.interfaces.CustomerServiceAccessor;
@@ -64,6 +65,9 @@ public class ContractCustomerService extends TimeslotPhaseProcessor implements
 
 	@Autowired
 	private TariffSubscriptionRepo tariffSubscriptionRepo;
+	
+	@Autowired
+	private BrokerProxy brokerProxyService;
 
 	/** Random Number Generator */
 	// private RandomSeed rs1;
@@ -105,14 +109,14 @@ public class ContractCustomerService extends TimeslotPhaseProcessor implements
 		serverPropertiesService.configureMe(this);
 
 		contractCustomerList.clear();
-
-		ContractCustomer c1 = new ContractCustomer(PowerType.CONSUMPTION);
+		
+		ContractCustomer c1 = new ContractCustomer(PowerType.CONSUMPTION, competition.getSimulationBaseTime());
 		c1.setServiceAccessor(this);
 		contractCustomerList.add(c1);
 		c1.initialize();
 		customerRepo.add(c1.getCustomerInfo(PowerType.CONSUMPTION));
 
-		ContractCustomer p1 = new ContractCustomer(PowerType.PRODUCTION);
+		ContractCustomer p1 = new ContractCustomer(PowerType.PRODUCTION, competition.getSimulationBaseTime());
 		p1.setServiceAccessor(this);
 		contractCustomerList.add(p1);
 		p1.initialize();
@@ -198,8 +202,14 @@ public class ContractCustomerService extends TimeslotPhaseProcessor implements
 
 	@Override
 	public void onMessage(ContractNegotiationMessage msg) {
-		// TODO notfalls hier nachricht weiterreichen
+		customerRepo.findById(msg.getCustomerId());
+		contractMarketService.forwardCollectedMessages();
 
+	}
+
+	@Override
+	public BrokerProxy getBrokerProxyService() {
+		return brokerProxyService;
 	}
 
 }

@@ -1,16 +1,22 @@
 package org.powertac.contractcustomer;
 
 import org.joda.time.DateTime;
+import org.joda.time.Instant;
 import org.powertac.common.CustomerInfo;
 import org.powertac.common.enumerations.PowerType;
 import org.powertac.common.exceptions.PowerTacException;
 import org.powertac.common.timeseries.LoadTimeSeries;
 import org.powertac.customer.AbstractContractCustomer;
+import org.springframework.stereotype.Service;
 
 public class ContractCustomer extends AbstractContractCustomer {
 
-	public ContractCustomer(PowerType powertype) {
+	public ContractCustomer(){
 		super();
+	}
+	
+	public ContractCustomer(PowerType powertype, Instant baseTime) {
+		super(baseTime.toDateTime());
 		if (powertype == PowerType.CONSUMPTION)
 			name = "contractConsumer" + custId;
 		else if (powertype == PowerType.PRODUCTION)

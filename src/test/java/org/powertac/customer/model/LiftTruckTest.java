@@ -45,6 +45,7 @@ import org.powertac.common.TimeService;
 import org.powertac.common.Timeslot;
 import org.powertac.common.config.Configurator;
 import org.powertac.common.enumerations.PowerType;
+import org.powertac.common.interfaces.BrokerProxy;
 import org.powertac.common.interfaces.CustomerServiceAccessor;
 import org.powertac.common.interfaces.ServerConfiguration;
 import org.powertac.common.repo.ContractRepo;
@@ -807,6 +808,12 @@ public class LiftTruckTest
 
 	@Override
 	public TimeSeriesRepo getTimeSeriesRepo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BrokerProxy getBrokerProxyService() {
 		// TODO Auto-generated method stub
 		return null;
 	}
