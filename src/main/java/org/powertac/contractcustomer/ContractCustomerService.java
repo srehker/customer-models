@@ -113,14 +113,15 @@ public class ContractCustomerService extends TimeslotPhaseProcessor implements
 		ContractCustomer c1 = new ContractCustomer(PowerType.CONSUMPTION, competition.getSimulationBaseTime());
 		c1.setServiceAccessor(this);
 		contractCustomerList.add(c1);
-		c1.initialize();
 		customerRepo.add(c1.getCustomerInfo(PowerType.CONSUMPTION));
+		c1.initialize();
+		
 
 		ContractCustomer p1 = new ContractCustomer(PowerType.PRODUCTION, competition.getSimulationBaseTime());
 		p1.setServiceAccessor(this);
 		contractCustomerList.add(p1);
-		p1.initialize();
 		customerRepo.add(p1.getCustomerInfo(PowerType.PRODUCTION));
+		p1.initialize();
 
 		return "ContractCustomer";
 	}
