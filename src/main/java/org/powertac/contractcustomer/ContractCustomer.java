@@ -39,7 +39,7 @@ public class ContractCustomer extends AbstractContractCustomer {
 		if(!activeContract(service.getTimeslotRepo().currentTimeslot().getStartTime())){
 			for (CustomerInfo ci : service.getCustomerRepo().findByName(
 					getName())) {
-				ContractAnnounce cann = new ContractAnnounce(ci.getId());// has to be CustomerInfo ID
+				ContractAnnounce cann = new ContractAnnounce(ci.getId(), service.getTimeslotRepo().currentTimeslot().getStartTime().getMillis());// has to be CustomerInfo ID
 				service.getBrokerProxyService().broadcastMessage(cann);
 			}
 		}
